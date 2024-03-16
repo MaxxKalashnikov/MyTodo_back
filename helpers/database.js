@@ -1,18 +1,19 @@
 require('dotenv').config()
 const { Pool } = require("pg");
 
-const query = async(sql, values = []) => {
+
+const query = async(sql, values = []) => {//sql - for sql quering, values array - for handling more than one value from db
     return new Promise(async(resolve, reject) =>{
         try{
             const pool = openDB();
             const result = await pool.query(sql, values);
-            resolve(result);
+            resolve(result);//if success, returns resolved data 
         }catch(error){
             reject(error.message)
         }
     })
 }
-
+//for handling db connection
 const openDB = () =>{
     const pool = new Pool({
         user: process.env.DB_USER,
